@@ -11,10 +11,13 @@ To view, go to https://sohrabsaran.github.io/AIDemos/supervisedLearning/js/ml5js
   </head>
   <body>
 To edit this page, go <a href="https://github.com/sohrabsaran/AIDemos/edit/master/supervisedLearning/js/ml5js/demo1.html">here</a>.<br>
-    <script>
-      // Your code will go here
-      // open up your console - if everything loaded properly you should see 0.4.1
-      console.log('ml5 version:', ml5.version);
-    </script>
+<script type="module">
+import * as u from 'https://jsutil37.github.io/jsutil/util.js';
+redrawHtml(`<textarea id="logWindow" style="width:99%;height:50px;background:#eeeeee" class="logWindow" readonly></textarea>`);
+let logWindow = el('logWindow');
+function log(s){logWindow.value+=s+'\n';}
+log('test message');
+  log('ml5 version:'+ ml5.version);
+</script>
   </body>
 </html>

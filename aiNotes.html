@@ -8,7 +8,9 @@
   gtag('config', 'UA-160632648-2');
 </script>
 <script>
-  frame1.src+=window.location.hash
+  console.log('document.getElementById(\'frame1\').src',document.getElementById('frame1').src);
+  console.log('window.location.hash',window.location.hash);
+  document.getElementById('frame1').src+=window.location.hash;
 </script>
 
 AI Notes by Sohrab R Saran<br>

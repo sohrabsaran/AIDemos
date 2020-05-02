@@ -5,16 +5,14 @@ https://sohrabsaran.github.io/AIDemos/aiNotes.html#h.4x8huwfrav6i
 function generateAndTest_algo(
 P,
 first, 
-candidateSolutionType, 
-createEmptyListForEncounteredCandidates, 
-createEmptyObjectForNextCandidateTrackingInfo, 
+candidateSolutionType,
 valid, 
 use, 
 next
 )
 {
-	let encounteredCandidates = createEmptyListForEncounteredCandidates()
-	let nextCandidateTrackingInfo = createEmptyObjectForNextCandidateTrackingInfo()
+	let encounteredCandidates = {}
+	let nextCandidateTrackingInfo = []
 	let c = first(candidateSolutionType)
 	while(c != null)
 	{

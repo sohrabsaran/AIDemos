@@ -19,6 +19,6 @@ next
 		if(valid(c, s)) {
 			use(c, s)
 		}
-		c = next(s)
+		c = next(s, c)
 	}
 }

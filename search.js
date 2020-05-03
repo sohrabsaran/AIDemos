@@ -2,23 +2,23 @@
 Detailed Documentation:
 https://sohrabsaran.github.io/AIDemos/aiNotes.html#h.4x8huwfrav6i
 */
-function generateAndTest_algo(
+function generateAndTest(
 P,
-first, 
-candidateSolutionType,
+newSearch,
+first,
 valid, 
 use, 
 next
 )
 {
-	let encounteredCandidates = {}
-	let nextCandidateTrackingInfo = []
-	let c = first(candidateSolutionType)
+	let s = newSearch()
+	s.p = P
+	let c = first()
 	while(c != null)
 	{
-		if(valid(P, c, encounteredCandidates)) {
-			use(P, c, nextCandidateTrackingInfo)
+		if(valid(c, s)) {
+			use(c, s)
 		}
-		c = next(c, candidateSolutionType, nextCandidateTrackingInfo)
+		c = next(s)
 	}
 }

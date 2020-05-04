@@ -9,22 +9,41 @@ END Please preserve this notice
 Detailed Documentation:
 https://sohrabsaran.github.io/AIDemos/aiNotes.html#h.4x8huwfrav6i
 */
-function generateAndTest(p, newSearch, first, valid, use, next) {
-	let s = newSearch()
-	s.p = p
-	let c = first()
-	while(c != null) {
-		if(valid(c, s)) {use(c, s)}
-		c = next(s, c)
+let searchState
+let problem
+let candidate
+let newSearchState
+let validCandidate
+let useCandidate
+let nextCandidate
+let getUniqueStringFromCandidate
+let removeFullyTestedCandidateFromListOfPartlyTested
+let addGeneratedCandidateToListOfPartlyTested
+let testCandidate
+let updateBestCandidates
+let updateGenerators
+let getBestGenerator
+let bestGenerator
+let candidateCtr = 0
+let generatedCandidate
+let generateNextCandidate
+let generateNextCandidateFromBestGenerator
+
+function generateAndTest() {
+	searchState = newSearchState()
+	candidate = firstCandidate()
+	while(candidate != null) {
+		if(validCandidate()) {useCandidate()}
+		 nextCandidate()
 	}
 }
 
-function doNonBruteForceSearch(p, first, valid, use, next) {
-	let newSearch = newNonBruteForceSearch
-	valid = valid ? valid : nonBruteForceSearchValid
-	use = use ? use : nonBruteForceSearchUse
-	next = next ? next : nonBruteForceSearchNext
-	generateAndTest(p, newSearch, first, valid, use, next)
+function doNonBruteForceSearch() {
+	newSearchState = newNonBruteForceSearch
+	validCandidate = validCandidate ?? nonBruteForceValidCandidate
+	useCandidate = useCandidate ?? nonBruteForceUseCandidate
+	nextCandidate = nextCandidate ?? nonBruteForceNextCandidate
+	generateAndTest()
 } 
 
 
@@ -38,35 +57,43 @@ function newNonBruteForceSearch() {
 	return s
 }
 
-function nonBruteForceSearchValid(c, s) {
-	let k = getStringForUniquenessChecking(c)
+function nonBruteForceValidCandidate() {
+	let k = getUniqueStringFromCandidate()
 	let v = s.encounteredCandidates[k]
 	if(v != null && v != c.id){return false}
 	if(v == null) {s.encounteredCandidates[k] = c.id}
 	return true
  }
 
-function nonBruteForceSearchUse(c, s) {
-	s.prevBestError = s.bestError 
-	try {c.error += test(c, s.p)}catch(e){c.error = Infinity}
+function nonBruteForceUseCandidate() {
+	let s = searchState
+	let c = candidate
+	s.prevBestError = s.bestError
+	try {c.error += testCandidate()}catch(e){
+		c.error = Infinity
+		c.isFullyTested = true	
+	}
 	if(c.isFullyTested) {
-		removeFromPartlyTestedCandidates(c, s.partlyTestedCandidates)
+		removeFullyTestedCandidateFromListOfPartlyTested()
 		if(c.error <= s.bestError){
-			updateBestCandidates(s.bestCandidates, c)
+			updateBestCandidates()
 			s.bestError = c.error
 		}
 	}
-	s.updateGenerators(c)
+	updateGenerators()
 }
 
-let candidateCtr = 0
-
-function nonBruteForceSearchNext(s, c) {
-	let generator = bestGenerator(s.generators)
-	c = nextCandidateFromGenerator(generator)
+function nonBruteForceNextCandidate() {
+	generateNextCandidate()
+	let c = generatedCandidate
 	c.id = candidateCtr
 	candidateCtr++
 	c.error = 0
-	addToPartlyTestedCandidates(c, s.partlyTestedCandidates)
-	return nextCandidate(c, s.partlyTestedCandidates)
+	addGeneratedCandidateToListOfPartlyTested()
+	return bestCandidateOutOfGeneratedOneAndPartlyTestedOnes()
+}
+	
+function generateNextCandidate() {
+	bestGenerator = getBestGenerator()
+	generateNextCandidateFromBestGenerator()
 }

@@ -26,7 +26,6 @@ let selectBestGenerator
 let bestGenerator
 let candidateCtr = 0
 let generatedCandidate
-let generateNextCandidate
 let generateNextCandidateFromBestGenerator
 let selectBestCandidateOutOfGeneratedOneAndPartlyTestedOnes
 

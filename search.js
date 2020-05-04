@@ -9,9 +9,9 @@ END Please preserve this notice
 Detailed Documentation:
 https://sohrabsaran.github.io/AIDemos/aiNotes.html#h.4x8huwfrav6i
 */
-function generateAndTest(P, newSearch, first, valid, use, next) {
+function generateAndTest(p, newSearch, first, valid, use, next) {
 	let s = newSearch()
-	s.p = P
+	s.p = p
 	let c = first()
 	while(c != null) {
 		if(valid(c, s)) {use(c, s)}
@@ -19,12 +19,12 @@ function generateAndTest(P, newSearch, first, valid, use, next) {
 	}
 }
 
-function doNonBruteForceSearch(P, first, valid, use, next) {
+function doNonBruteForceSearch(p, first, valid, use, next) {
 	let newSearch = newNonBruteForceSearch
 	valid = valid ? valid : nonBruteForceSearchValid
 	use = use ? use : nonBruteForceSearchUse
 	next = next ? next : nonBruteForceSearchNext
-	generateAndTest(P, newSearch, first, valid, use, next)
+	generateAndTest(p, newSearch, first, valid, use, next)
 } 
 
 
@@ -41,8 +41,8 @@ function newNonBruteForceSearch() {
 function nonBruteForceSearchValid(c, s) {
 	let k = getStringForUniquenessChecking(c)
 	let v = s.encounteredCandidates[k]
-	if(v != null && v != getId(c)){return false}
-	if(v == null) {s.encounteredCandidates[k] = getId(c)}
+	if(v != null && v != c.id){return false}
+	if(v == null) {s.encounteredCandidates[k] = c.id}
 	return true
  }
 

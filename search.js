@@ -15,26 +15,27 @@ let candidate
 let newSearchState
 let validCandidate
 let useCandidate
-let nextCandidate
+let selectNextCandidate
 let getUniqueStringFromCandidate
 let removeFullyTestedCandidateFromListOfPartlyTested
 let addGeneratedCandidateToListOfPartlyTested
 let testCandidate
 let updateBestCandidates
 let updateGenerators
-let getBestGenerator
+let selectBestGenerator
 let bestGenerator
 let candidateCtr = 0
 let generatedCandidate
 let generateNextCandidate
 let generateNextCandidateFromBestGenerator
+let selectBestCandidateOutOfGeneratedOneAndPartlyTestedOnes
 
 function generateAndTest() {
 	searchState = newSearchState()
 	candidate = firstCandidate()
 	while(candidate != null) {
 		if(validCandidate()) {useCandidate()}
-		 nextCandidate()
+		 selectNextCandidate()
 	}
 }
 
@@ -42,7 +43,7 @@ function doNonBruteForceSearch() {
 	newSearchState = newNonBruteForceSearch
 	validCandidate = validCandidate ?? nonBruteForceValidCandidate
 	useCandidate = useCandidate ?? nonBruteForceUseCandidate
-	nextCandidate = nextCandidate ?? nonBruteForceNextCandidate
+	selectNextCandidate = selectNextCandidate ?? nonBruteForceSelectNextCandidate
 	generateAndTest()
 } 
 
@@ -83,17 +84,17 @@ function nonBruteForceUseCandidate() {
 	updateGenerators()
 }
 
-function nonBruteForceNextCandidate() {
+function nonBruteForceSelectNextCandidate() {
 	generateNextCandidate()
 	let c = generatedCandidate
 	c.id = candidateCtr
 	candidateCtr++
 	c.error = 0
 	addGeneratedCandidateToListOfPartlyTested()
-	return bestCandidateOutOfGeneratedOneAndPartlyTestedOnes()
+	selectBestCandidateOutOfGeneratedOneAndPartlyTestedOnes()
 }
 	
 function generateNextCandidate() {
-	bestGenerator = getBestGenerator()
+	selectBestGenerator()
 	generateNextCandidateFromBestGenerator()
 }

@@ -49,9 +49,12 @@ function nonBruteForceSearchValid(c, s) {
 function nonBruteForceSearchUse(c, s) {
 	s.prevBestError = s.bestError 
 	try {c.error += test(c, s.p)}catch(e){c.error = Infinity}
-	if(c.error <= s.bestError && c.isFullyTested){
-		updateBestCandidates(s.bestCandidates, c)
-		s.bestError = c.error
+	if(c.isFullyTested) {
+		removeFromPartlyTestedCandidates(c, s.partlyTestedCandidates)
+		if(c.error <= s.bestError){
+			updateBestCandidates(s.bestCandidates, c)
+			s.bestError = c.error
+		}
 	}
 	s.updateGenerators(c)
 }
@@ -64,5 +67,6 @@ function nonBruteForceSearchNext(s, c) {
 	c.id = candidateCtr
 	candidateCtr++
 	c.error = 0
+	addToPartlyTestedCandidates(c, s.partlyTestedCandidates)
 	return nextCandidate(c, s.partlyTestedCandidates)
 }

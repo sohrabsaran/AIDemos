@@ -48,7 +48,7 @@ function nonBruteForceSearchValid(c, s) {
 
 function nonBruteForceSearchUse(c, s) {
 	s.prevBestError = s.bestError 
-	try {c.error += test(c, s.p)}catch{c.error = Infinity}
+	try {c.error += test(c, s.p)}catch(e){c.error = Infinity}
 	if(c.error <= s.bestError && c.isFullyTested){
 		updateBestCandidates(s.bestCandidates, c)
 		s.bestError = c.error

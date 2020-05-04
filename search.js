@@ -33,6 +33,7 @@ function newNonBruteForceSearch() {
 	s.encounteredCandidates = {}
 	s.generators = []
 	s.bestCandidates = []
+	s.partlyTestedCandidates = []
 	s.bestError = Infinity
 	return s
 }
@@ -46,17 +47,22 @@ function nonBruteForceSearchValid(c, s) {
  }
 
 function nonBruteForceSearchUse(c, s) {
-	let error
-	Let prevBestError = s.bestError 
-	try {error = test(c, s.p)}catch{error = Infinity}
-	if(error <= s.bestError){
-		updateBestCandidates(s.bestCandidates, c, error)
-		s.bestError = error
+	s.prevBestError = s.bestError 
+	try {c.error += test(c, s.p)}catch{c.error = Infinity}
+	if(c.error <= s.bestError && c.isFullyTested){
+		updateBestCandidates(s.bestCandidates, c)
+		s.bestError = c.error
 	}
-	s.updateGenerators(c, error, prevBestError)
+	s.updateGenerators(c)
 }
+
+let candidateCtr = 0
 
 function nonBruteForceSearchNext(s, c) {
 	let generator = bestGenerator(s.generators)
-	return nextCandidate(generator)
+	c = nextCandidate(generator)
+	c.id = candidateCtr
+	candidateCtr++
+	c.error = 0
+	return bestNextCandidate(c, s.partlyTestedCandidates)
 }

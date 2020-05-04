@@ -60,9 +60,9 @@ let candidateCtr = 0
 
 function nonBruteForceSearchNext(s, c) {
 	let generator = bestGenerator(s.generators)
-	c = nextCandidate(generator)
+	c = nextCandidateFromGenerator(generator)
 	c.id = candidateCtr
 	candidateCtr++
 	c.error = 0
-	return bestNextCandidate(c, s.partlyTestedCandidates)
+	return nextCandidate(c, s.partlyTestedCandidates)
 }

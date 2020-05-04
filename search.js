@@ -38,25 +38,25 @@ function newNonBruteForceSearch() {
 }
 
 function nonBruteForceSearchValid(c, s) {
-	let k = c.getStringForUniquenessChecking()
+	let k = getStringForUniquenessChecking(c)
 	let v = s.encounteredCandidates[k]
-	if(v != null && v != c.getId()){return false}
-	if(v == null) {s.encounteredCandidates[k] = c.getId()}
+	if(v != null && v != getId(c)){return false}
+	if(v == null) {s.encounteredCandidates[k] = getId(c)}
 	return true
  }
 
 function nonBruteForceSearchUse(c, s) {
 	let error
 	Let prevBestError = s.bestError 
-	try {error = c.testSelfAgainst(s.p)}catch{error = Infinity}
+	try {error = test(c, s.p)}catch{error = Infinity}
 	if(error <= s.bestError){
-		s.updateBestCandidates(c, error)
+		updateBestCandidates(s.bestCandidates, c, error)
 		s.bestError = error
 	}
 	s.updateGenerators(c, error, prevBestError)
 }
 
 function nonBruteForceSearchNext(s, c) {
-	let generator = s.bestGenerator()
-	return generator.next()
+	let generator = bestGenerator(s.generators)
+	return nextCandidate(generator)
 }

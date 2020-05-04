@@ -2,7 +2,7 @@
 START Please preserve this notice
 Copyright sohrabsaran@gmail.com, 2020. MIT License.
 License file location: https://github.com/sohrabsaran/AIDemos/blob/master/LICENSE
-Location of this file in its repository: https://github.com/sohrabsaran/AIDemos/blob/master/search.js
+Location of this file in its repository: https://github.com/sohrabsaran/AIDemos/blob/master/search/search.js
 deployed at: NA
 END Please preserve this notice
 

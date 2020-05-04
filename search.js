@@ -1,4 +1,11 @@
 /*
+START Please preserve this notice
+Copyright sohrabsaran@gmail.com, 2020. MIT License.
+License file location: https://github.com/sohrabsaran/AIDemos/blob/master/LICENSE
+Location of this file in its repository: https://github.com/sohrabsaran/AIDemos/blob/master/search.js
+deployed at: NA
+END Please preserve this notice
+
 Detailed Documentation:
 https://sohrabsaran.github.io/AIDemos/aiNotes.html#h.4x8huwfrav6i
 */

@@ -12,6 +12,15 @@ function generateAndTest(P, newSearch, first, valid, use, next) {
 	}
 }
 
+function doNonBruteForceSearch(P, first, valid, use, next) {
+	let newSearch = newNonBruteForceSearch
+	valid = valid ? valid : nonBruteForceSearchValid
+	use = use ? use : nonBruteForceSearchUse
+	next = next ? next : nonBruteForceSearchNext
+	generateAndTest(P, newSearch, first, valid, use, next)
+} 
+
+
 function newNonBruteForceSearch() {
 	let s = {}
 	s.encounteredCandidates = {}
@@ -40,3 +49,7 @@ function nonBruteForceSearchUse(c, s) {
 	s.updateGenerators(c, error, prevBestError)
 }
 
+function nonBruteForceSearchNext(s, c) {
+	let generator = s.bestGenerator()
+	return generator.next()
+}

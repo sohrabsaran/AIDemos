@@ -1,6 +1,6 @@
 /*
 START Please preserve this notice
-Copyright sohrabsaran@gmail.com, 2020. MIT License.
+Copyright sohrabsaran@gmail.com, 2020,22. MIT License.
 License file location: https://github.com/sohrabsaran/AIDemos/blob/master/LICENSE
 Location of this file in its repository: https://github.com/sohrabsaran/AIDemos/blob/master/search/search.js
 deployed at: NA
@@ -29,6 +29,14 @@ let generatedCandidate
 let generateNextCandidateFromBestGenerator
 let selectBestCandidateOutOfGeneratedOneAndPartlyTestedOnes
 
+export function set(varName, value){
+switch(varName){
+case 'updateGenerators':
+  updateGenerators = value
+  return
+}
+}
+
 function generateAndTest() {
 	searchState = newSearchState()
 	candidate = firstCandidate()
@@ -38,7 +46,7 @@ function generateAndTest() {
 	}
 }
 
-function doNonBruteForceSearch() {
+export function doNonBruteForceSearch() {
 	newSearchState = newNonBruteForceSearch
 	validCandidate = validCandidate ?? nonBruteForceValidCandidate
 	useCandidate = useCandidate ?? nonBruteForceUseCandidate
